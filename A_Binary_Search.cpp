@@ -1,20 +1,23 @@
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
-const int N = 1e5 + 9;
-int a[N], x;
-bool search(int l, int h){
-    if(l > h) return false;
-    int mid = (l + h) / 2;
-    if(a[mid] == x) return true;
-    else if(x > a[mid]) return search(mid + 1, h);
-    else return search(l, mid - 1);
-    }
 int main (){
-    int n, k; cin >> n >> k;
+
+    int n, q; cin >> n >> q;
+    int a[n];
     for(int i = 1; i <= n; i++) cin >> a[i];
-    while(k--){
-         cin >> x;
-         if(search(1, n)) cout << "YES" << endl;
-         else cout << "NO" << endl;
+    while(q--){
+        int x; cin >> x;
+        int l = 1, r = n;
+        bool found = false;
+        while(l <= r){
+            int mid = l + (r - l) / 2;
+            if(a[mid] == x) {found = true; break;}
+            else if(x > a[mid]) l = mid + 1;
+            else r = mid - 1;
+        }
+        if(found) cout << "YES" << endl;
+        else cout << "NO" << endl;
     }
+
+    return 0;
 }
